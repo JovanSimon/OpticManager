@@ -96,6 +96,10 @@ kotlin {
             // Room
             implementation(libs.room.runtime)
             implementation(libs.sqlite.bundled)
+
+            //Navigation
+            implementation(libs.navigation.compose)
+
         }
         desktopMain.dependencies {
             implementation(compose.desktop.currentOs)
