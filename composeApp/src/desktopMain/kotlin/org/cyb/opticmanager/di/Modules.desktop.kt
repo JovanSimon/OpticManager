@@ -1,6 +1,5 @@
 package org.cyb.opticmanager.di
 
-import androidx.lifecycle.viewmodel.compose.viewModel
 import org.cyb.opticmanager.db.AppDatabase
 import org.cyb.opticmanager.db.getDatabaseBuilder
 import org.cyb.opticmanager.initialScreen.InitialScreenViewModel
