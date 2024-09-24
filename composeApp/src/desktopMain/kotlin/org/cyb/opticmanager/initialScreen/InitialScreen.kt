@@ -27,7 +27,7 @@ fun NavGraphBuilder.initialScreen(
 ) = composable(
     route = route
 ) {
-    val viewModel = koinInject<InitialScreenViewModel>()
+    val viewModel: InitialScreenViewModel = koinInject()
     val state = viewModel.state.collectAsState()
 
     InitialScreen(
@@ -58,9 +58,9 @@ fun InitialScreen (
                     start = 80.dp
                 )
         ) {
-            items(100) {
+            items(1) {
                 Text(
-                    text = "Item$it",
+                    text = state.test,
                 )
             }
         }

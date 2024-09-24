@@ -83,6 +83,7 @@ kotlin {
             implementation(project.dependencies.platform(libs.koin.bom))
             implementation(libs.koin.core)
             implementation(libs.koin.compose)
+            implementation(libs.lifecycle.viewmodel)
 
             // Crypto
             implementation(libs.secp256k1.kmp)
@@ -99,6 +100,8 @@ kotlin {
 
             //Navigation
             implementation(libs.navigation.compose)
+
+            runtimeOnly(libs.kotlinx.coroutines.swing)
 
         }
         desktopMain.dependencies {
