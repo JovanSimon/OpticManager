@@ -83,6 +83,7 @@ kotlin {
             implementation(project.dependencies.platform(libs.koin.bom))
             implementation(libs.koin.core)
             implementation(libs.koin.compose)
+            implementation(libs.lifecycle.viewmodel)
 
             // Crypto
             implementation(libs.secp256k1.kmp)
@@ -96,6 +97,12 @@ kotlin {
             // Room
             implementation(libs.room.runtime)
             implementation(libs.sqlite.bundled)
+
+            //Navigation
+            implementation(libs.navigation.compose)
+
+            runtimeOnly(libs.kotlinx.coroutines.swing)
+
         }
         desktopMain.dependencies {
             implementation(compose.desktop.currentOs)
@@ -157,6 +164,7 @@ compose.desktop {
 }
 
 dependencies {
+    implementation(libs.firebase.vertexai)
     add("kspCommonMainMetadata", libs.room.compiler)
 }
 

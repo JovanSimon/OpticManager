@@ -1,34 +1,26 @@
 package org.cyb.opticmanager
 
-import androidx.compose.foundation.layout.Box
-import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material.MaterialTheme
-import androidx.compose.material.Text
 import androidx.compose.runtime.*
-import androidx.compose.ui.Alignment
-import androidx.compose.ui.Modifier
 import org.jetbrains.compose.ui.tooling.preview.Preview
 
-import org.cyb.opticmanager.db.AppDatabase
 import org.koin.compose.KoinContext
-import org.koin.compose.koinInject
 
 @Composable
 @Preview
 fun App(
-    db: AppDatabase = koinInject()
 ) {
     MaterialTheme {
         KoinContext {
-            Box(
-                modifier = Modifier
-                    .fillMaxSize(),
-                contentAlignment = Alignment.Center
-            ) {
-                Text(
-                    text = db.testDao().getAll().toString()
-                )
-            }
+//            Box(
+//                modifier = Modifier
+//                    .fillMaxSize(),
+//                contentAlignment = Alignment.Center
+//            ) {
+//                Text(
+//                    text = db..getAll().toString()
+//                )
+//            }
         }
 //        var showContent by remember { mutableStateOf(false) }
 //        Column(Modifier.fillMaxWidth(), horizontalAlignment = Alignment.CenterHorizontally) {

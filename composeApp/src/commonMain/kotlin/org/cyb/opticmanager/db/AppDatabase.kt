@@ -2,16 +2,24 @@ package org.cyb.opticmanager.db
 
 import androidx.room.Database
 import androidx.room.RoomDatabase
+//import androidx.room.TypeConverters
+import org.cyb.opticmanager.db.daos.AppointmentDao
+import org.cyb.opticmanager.db.daos.PatientDao
+import org.cyb.opticmanager.db.dataModels.AppointmentData
+import org.cyb.opticmanager.db.dataModels.PatientData
+
 
 @Database(
     entities = [
-        Entity::class
+        AppointmentData::class,
+        PatientData::class
     ],
-    version = 1,
+    version = 3,
     exportSchema = true
 )
 abstract class AppDatabase : RoomDatabase(), DB {
-    abstract fun testDao(): TestDao
+    abstract fun appointmentsDao(): AppointmentDao
+    abstract fun patientDao(): PatientDao
     override fun clearAllTables(): Unit {}
 }
 

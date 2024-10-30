@@ -18,14 +18,18 @@ kotlinx-serialization = "1.7.0"
 kotlinx-datetime = "0.6.0"
 koin-bom = "3.5.6"
 koinComposeMultiplatform = "1.2.0-alpha3"
-koinCompose = "3.6.0-alpha3"
+koinCompose = "3.5.6"
+kotlinxCoroutinesSwing = "1.8.1"
 ktor = "2.3.11"
 logback = "1.5.6"
+navigationCompose = "2.7.0-alpha07"
 secp256k1-kmp = "0.15.0"
 spongycastle = "1.58.0.0"
 roomCommon = "2.7.0-alpha01"
 ksp = "2.0.20-Beta1-1.0.22"
 sqlite = "2.5.0-SNAPSHOT"
+lifecycleViewModel = "2.8.2"
+firebaseVertexai = "16.0.1"
 
 [libraries]
 kotlin-test = { module = "org.jetbrains.kotlin:kotlin-test", version.ref = "kotlin" }
@@ -40,6 +44,8 @@ androidx-material = { group = "com.google.android.material", name = "material", 
 androidx-constraintlayout = { group = "androidx.constraintlayout", name = "constraintlayout", version.ref = "androidx-constraintlayout" }
 androidx-activity-compose = { module = "androidx.activity:activity-compose", version.ref = "androidx-activityCompose" }
 
+kotlinx-coroutines-swing = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-swing", version.ref = "kotlinxCoroutinesSwing" }
+navigation-compose = { module = "org.jetbrains.androidx.navigation:navigation-compose", version.ref = "navigationCompose" }
 room-runtime = { group = "androidx.room", name = "room-runtime", version.ref = "roomCommon" }
 room-runtime-android = { group = "androidx.room", name = "room-runtime-android", version.ref = "roomCommon" }
 room-compiler = { group = "androidx.room", name = "room-compiler", version.ref = "roomCommon" }
@@ -53,13 +59,16 @@ kotlinx-datetime = { module = "org.jetbrains.kotlinx:kotlinx-datetime", version.
 logback = { module = "ch.qos.logback:logback-classic", version.ref = "logback" }
 
 # DI
+lifecycle-viewmodel = { module = "androidx.lifecycle:lifecycle-viewmodel", version.ref = "lifecycleViewModel"}
 koin-bom = { module = "io.insert-koin:koin-bom", version.ref = "koin-bom" }
 koin-core = { module = "io.insert-koin:koin-core" }
 koin-compose = { module = "io.insert-koin:koin-compose", version.ref = "koinComposeMultiplatform" }
 koin-androidx-compose = { module = "io.insert-koin:koin-androidx-compose", version.ref = "koinCompose" }
+koin-compose-viewmodel = { module = "io.insert-koin:koin-compose-viewmodel", version.ref = "koinComposeMultiplatform" }
 
 # Serialization
 kotlinx-serialization-json = { module = "org.jetbrains.kotlinx:kotlinx-serialization-json", version.ref = "kotlinx-serialization" }
+
 
 # Ktor CLient
 ktor-client-core = { module = "io.ktor:ktor-client-core", version.ref = "ktor" }
@@ -74,6 +83,7 @@ ktor-client-websockets = { module = "io.ktor:ktor-client-websockets", version.re
 secp256k1-kmp = { module = "fr.acinq.secp256k1:secp256k1-kmp", version.ref = "secp256k1-kmp" }
 secp256k1-kmp-jni-android = { module = "fr.acinq.secp256k1:secp256k1-kmp-jni-android", version.ref = "secp256k1-kmp" }
 secp256k1-kmp-jni-jvm = { module = "fr.acinq.secp256k1:secp256k1-kmp-jni-jvm", version.ref = "secp256k1-kmp" }
+firebase-vertexai = { group = "com.google.firebase", name = "firebase-vertexai", version.ref = "firebaseVertexai" }
 
 [plugins]
 androidApplication = { id = "com.android.application", version.ref = "agp" }
