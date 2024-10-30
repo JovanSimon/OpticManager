@@ -2,10 +2,6 @@ package org.cyb.opticmanager.db.dataModels
 
 import androidx.room.Entity
 import androidx.room.PrimaryKey
-import androidx.room.TypeConverter
-import kotlinx.serialization.Serializable
-import kotlinx.serialization.encodeToString
-import kotlinx.serialization.json.Json
 
 @Entity(tableName = "patients")
 data class PatientData(

@@ -8,9 +8,7 @@ import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.filterIsInstance
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
-import org.cyb.opticmanager.db.dataModels.AppointmentData
 import org.cyb.opticmanager.db.dataModels.PatientData
-import org.cyb.opticmanager.initialScreen.repository.AppointmentRepository
 import org.cyb.opticmanager.initialScreen.repository.PatientRepository
 
 class InitialScreenViewModel(
