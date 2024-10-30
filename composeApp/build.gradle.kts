@@ -164,6 +164,7 @@ compose.desktop {
 }
 
 dependencies {
+    implementation(libs.firebase.vertexai)
     add("kspCommonMainMetadata", libs.room.compiler)
 }
 

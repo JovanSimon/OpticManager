@@ -1,9 +1,12 @@
 package org.cyb.opticmanager.initialScreen
 
+import org.cyb.opticmanager.db.dataModels.PatientData
+
 interface InitialScreenContract {
     data class InitialScreenUiState(
         val selectedItemIndex: Int = 0,
-        val test: String = ""
+        val loadingPatients: Boolean = false,
+        val patients: List<PatientData> = emptyList()
     )
 
     sealed class InitialScreenUiError {
@@ -11,6 +14,6 @@ interface InitialScreenContract {
     }
 
     sealed class InitialScreenUiEvent {
-        data class testHappend(val value: String): InitialScreenUiEvent()
+        data class SearchPatients(val value: String): InitialScreenUiEvent()
     }
 }
