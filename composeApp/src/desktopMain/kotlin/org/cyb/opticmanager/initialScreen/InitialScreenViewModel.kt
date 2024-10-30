@@ -26,6 +26,17 @@ class InitialScreenViewModel(
     init {
         fillTable()
         observeSearch()
+        observeNavigationIndex()
+    }
+
+    private fun observeNavigationIndex() {
+        viewModelScope.launch {
+            events
+                .filterIsInstance<InitialScreenContract.InitialScreenUiEvent.SelectedNavigationIndex>()
+                .collect { event ->
+                    setState { copy(selectedItemIndex = event.index) }
+                }
+        }
     }
 
     private fun observeSearch() {
@@ -38,7 +49,7 @@ class InitialScreenViewModel(
                     val nameAndLastname = event.value.lowercase().split(" ")
 //                    println(nameAndLastname)
                     val filteredPatients = patientRepository.getPatientWithNameAndLastname(nameAndLastname[0], nameAndLastname[1])
-                    println(filteredPatients)
+//                    println(filteredPatients)
                     setState { copy(patients = filteredPatients) }
                     setState { copy(loadingPatients = false) }
                 }

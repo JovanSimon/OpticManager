@@ -1,5 +1,6 @@
 package org.cyb.opticmanager.di
 
+import org.cyb.opticmanager.addPatient.AddPatientViewModel
 import org.cyb.opticmanager.db.AppDatabase
 import org.cyb.opticmanager.db.getDatabaseBuilder
 import org.cyb.opticmanager.initialScreen.InitialScreenViewModel
@@ -12,4 +13,5 @@ actual fun platformModule() = module {
     single<AppointmentRepository> { AppointmentRepository(get()) }
     single<PatientRepository> { PatientRepository(get()) }
     single { InitialScreenViewModel(get()) }
+    single { AddPatientViewModel() }
 }

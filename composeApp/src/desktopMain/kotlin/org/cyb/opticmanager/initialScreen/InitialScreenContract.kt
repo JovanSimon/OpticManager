@@ -15,5 +15,6 @@ interface InitialScreenContract {
 
     sealed class InitialScreenUiEvent {
         data class SearchPatients(val value: String): InitialScreenUiEvent()
+        data class SelectedNavigationIndex(val index: Int): InitialScreenUiEvent()
     }
 }
