@@ -8,8 +8,8 @@ import org.koin.core.component.KoinComponent
 class PatientRepository (
     private val database: AppDatabase
 ): KoinComponent {
-    suspend fun insertPatient(patient: PatientData) {
-        database.patientDao().insertPatient(patient)
+    suspend fun insertPatient(patient: PatientData): Long {
+        return database.patientDao().insertPatient(patient)
     }
 
     fun getAllPatients(): Flow<List<PatientData>> {
@@ -23,4 +23,5 @@ class PatientRepository (
     suspend fun getPatientWithNameAndLastname(name: String, lastname: String): List<PatientData> {
         return database.patientDao().getPatientWithNameAndLastname(name, lastname)
     }
+
 }

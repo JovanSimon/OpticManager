@@ -1,0 +1,235 @@
+{
+  "formatVersion": 1,
+  "database": {
+    "version": 9,
+    "identityHash": "b73f6837ab4dc9b8836bbba588864a41",
+    "entities": [
+      {
+        "tableName": "appointments",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `name` TEXT NOT NULL, `lastName` TEXT NOT NULL, `time` TEXT NOT NULL, `description` TEXT NOT NULL)",
+        "fields": [
+          {
+            "fieldPath": "id",
+            "columnName": "id",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "name",
+            "columnName": "name",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "lastName",
+            "columnName": "lastName",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "time",
+            "columnName": "time",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "description",
+            "columnName": "description",
+            "affinity": "TEXT",
+            "notNull": true
+          }
+        ],
+        "primaryKey": {
+          "autoGenerate": true,
+          "columnNames": [
+            "id"
+          ]
+        }
+      },
+      {
+        "tableName": "patients",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `name` TEXT NOT NULL, `lastname` TEXT NOT NULL, `dateOfBirth` TEXT NOT NULL, `placeOfLiving` TEXT NOT NULL)",
+        "fields": [
+          {
+            "fieldPath": "id",
+            "columnName": "id",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "name",
+            "columnName": "name",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "lastname",
+            "columnName": "lastname",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "dateOfBirth",
+            "columnName": "dateOfBirth",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "placeOfLiving",
+            "columnName": "placeOfLiving",
+            "affinity": "TEXT",
+            "notNull": true
+          }
+        ],
+        "primaryKey": {
+          "autoGenerate": true,
+          "columnNames": [
+            "id"
+          ]
+        }
+      },
+      {
+        "tableName": "doctor_reports",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `patientId` INTEGER NOT NULL, `odSphFar` TEXT NOT NULL, `odClyFar` TEXT NOT NULL, `odAxFar` TEXT NOT NULL, `osSphFar` TEXT NOT NULL, `osClyFar` TEXT NOT NULL, `osAxFar` TEXT NOT NULL, `pdFar` INTEGER NOT NULL, `odSphClose` TEXT NOT NULL, `odClyClose` TEXT NOT NULL, `odAxClose` TEXT NOT NULL, `osSphClose` TEXT NOT NULL, `osClyClose` TEXT NOT NULL, `osAxClose` TEXT NOT NULL, `pdClose` INTEGER NOT NULL, `description` TEXT NOT NULL, FOREIGN KEY(`patientId`) REFERENCES `patients`(`id`) ON UPDATE NO ACTION ON DELETE CASCADE )",
+        "fields": [
+          {
+            "fieldPath": "id",
+            "columnName": "id",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "patientId",
+            "columnName": "patientId",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "odSphFar",
+            "columnName": "odSphFar",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "odClyFar",
+            "columnName": "odClyFar",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "odAxFar",
+            "columnName": "odAxFar",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "osSphFar",
+            "columnName": "osSphFar",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "osClyFar",
+            "columnName": "osClyFar",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "osAxFar",
+            "columnName": "osAxFar",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "pdFar",
+            "columnName": "pdFar",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "odSphClose",
+            "columnName": "odSphClose",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "odClyClose",
+            "columnName": "odClyClose",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "odAxClose",
+            "columnName": "odAxClose",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "osSphClose",
+            "columnName": "osSphClose",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "osClyClose",
+            "columnName": "osClyClose",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "osAxClose",
+            "columnName": "osAxClose",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "pdClose",
+            "columnName": "pdClose",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "description",
+            "columnName": "description",
+            "affinity": "TEXT",
+            "notNull": true
+          }
+        ],
+        "primaryKey": {
+          "autoGenerate": true,
+          "columnNames": [
+            "id"
+          ]
+        },
+        "indices": [
+          {
+            "name": "index_doctor_reports_patientId",
+            "unique": false,
+            "columnNames": [
+              "patientId"
+            ],
+            "orders": [],
+            "createSql": "CREATE INDEX IF NOT EXISTS `index_doctor_reports_patientId` ON `${TABLE_NAME}` (`patientId`)"
+          }
+        ],
+        "foreignKeys": [
+          {
+            "table": "patients",
+            "onDelete": "CASCADE",
+            "onUpdate": "NO ACTION",
+            "columns": [
+              "patientId"
+            ],
+            "referencedColumns": [
+              "id"
+            ]
+          }
+        ]
+      }
+    ],
+    "setupQueries": [
+      "CREATE TABLE IF NOT EXISTS room_master_table (id INTEGER PRIMARY KEY,identity_hash TEXT)",
+      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, 'b73f6837ab4dc9b8836bbba588864a41')"
+    ]
+  }
+}

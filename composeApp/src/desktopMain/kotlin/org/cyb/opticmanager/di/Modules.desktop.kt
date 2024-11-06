@@ -5,6 +5,7 @@ import org.cyb.opticmanager.db.AppDatabase
 import org.cyb.opticmanager.db.getDatabaseBuilder
 import org.cyb.opticmanager.initialScreen.InitialScreenViewModel
 import org.cyb.opticmanager.initialScreen.repository.AppointmentRepository
+import org.cyb.opticmanager.initialScreen.repository.DoctorReportRepository
 import org.cyb.opticmanager.initialScreen.repository.PatientRepository
 import org.koin.dsl.module
 
@@ -12,6 +13,7 @@ actual fun platformModule() = module {
     single<AppDatabase> { getDatabaseBuilder() }
     single<AppointmentRepository> { AppointmentRepository(get()) }
     single<PatientRepository> { PatientRepository(get()) }
+    single<DoctorReportRepository> { DoctorReportRepository(get()) }
     single { InitialScreenViewModel(get()) }
-    single { AddPatientViewModel() }
+    single { AddPatientViewModel(get(), get()) }
 }
