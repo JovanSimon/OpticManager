@@ -1,5 +1,6 @@
 package org.cyb.opticmanager.di
 
+import androidx.lifecycle.viewmodel.compose.viewModel
 import org.cyb.opticmanager.addPatient.AddPatientViewModel
 import org.cyb.opticmanager.db.AppDatabase
 import org.cyb.opticmanager.db.getDatabaseBuilder
@@ -7,6 +8,7 @@ import org.cyb.opticmanager.initialScreen.InitialScreenViewModel
 import org.cyb.opticmanager.initialScreen.repository.AppointmentRepository
 import org.cyb.opticmanager.initialScreen.repository.DoctorReportRepository
 import org.cyb.opticmanager.initialScreen.repository.PatientRepository
+import org.cyb.opticmanager.patientDetails.PatientDetailsViewModel
 import org.koin.dsl.module
 
 actual fun platformModule() = module {
@@ -16,4 +18,6 @@ actual fun platformModule() = module {
     single<DoctorReportRepository> { DoctorReportRepository(get()) }
     single { InitialScreenViewModel(get()) }
     single { AddPatientViewModel(get(), get()) }
+//    single { PatientDetailsViewModel(get()) }
+    factory { (patiendId: String) -> PatientDetailsViewModel(patiendId, get()) }
 }
