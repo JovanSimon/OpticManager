@@ -6,12 +6,13 @@ import kotlinx.coroutines.Dispatchers
 import java.io.File
 
 fun getDatabaseBuilder(): AppDatabase {
-    val dbFile = File(System.getProperty("java.io.tmpdir"), "opticManager.db")
+
+    val dbFile = File(System.getProperty("java.io.tmpdir"), "opticManager1.db")
     return Room.databaseBuilder<AppDatabase>(
         name = dbFile.absolutePath,
     )
         .setDriver(BundledSQLiteDriver())
         .setQueryCoroutineContext(Dispatchers.IO)
-        .fallbackToDestructiveMigration(true)
+        .fallbackToDestructiveMigration(dropAllTables = true)
         .build()
 }

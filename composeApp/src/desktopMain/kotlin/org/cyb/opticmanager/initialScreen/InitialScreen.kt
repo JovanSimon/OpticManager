@@ -27,6 +27,7 @@ import androidx.compose.material.Scaffold
 import androidx.compose.material.Text
 import androidx.compose.material.TextField
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -67,6 +68,11 @@ fun InitialScreen (
     eventPublisher: (uiEvent: InitialScreenContract.InitialScreenUiEvent) -> Unit,
     onUserClick: (String) -> Unit
 ) {
+
+    LaunchedEffect(state.selectedItemIndex) {
+
+    }
+
     Scaffold(
         modifier = Modifier
             .fillMaxSize()
@@ -89,7 +95,10 @@ fun InitialScreen (
     NavigationSideBar(
         items = items,
         selectedItemIndex = state.selectedItemIndex,
-        onNavigate = { TODO() }
+        onNavigate = {
+            onUserClick(it)
+        },
+        eventPublisher = eventPublisher
     )
 }
 
@@ -165,13 +174,21 @@ fun PatientCard(patient: PatientData) {
 fun NavigationSideBar(
     items: List<NavigationItem>,
     selectedItemIndex: Int,
-    onNavigate: (Int) -> Unit
+    onNavigate: (String) -> Unit,
+    eventPublisher: (uiEvent: InitialScreenContract.InitialScreenUiEvent) -> Unit
 ) {
     NavigationRail{
         items.forEachIndexed { index, item ->
             NavigationRailItem(
                 selected = selectedItemIndex == index,
-                onClick = { onNavigate(index) },
+                onClick = {
+                    eventPublisher(InitialScreenContract.InitialScreenUiEvent.SelectedNavigationIndex(index))
+                    when (index) {
+                        0 -> onNavigate("initial_screen")
+                        1 -> onNavigate("add_patient")
+                        2 -> onNavigate("appointments")
+                    }
+                },
                 icon = {
                     NavigationIcon(
                         item = item,
@@ -181,7 +198,6 @@ fun NavigationSideBar(
                 label = {
                     Text(text = item.title)
                 },
-
             )
         }
     }
