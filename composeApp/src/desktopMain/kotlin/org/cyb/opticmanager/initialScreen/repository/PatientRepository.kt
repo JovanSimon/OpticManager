@@ -20,8 +20,8 @@ class PatientRepository (
         database.patientDao().clearTable()
     }
 
-    suspend fun getPatientWithNameAndLastname(name: String, lastname: String): List<PatientData> {
-        return database.patientDao().getPatientWithNameAndLastname(name, lastname)
+    suspend fun searchPatients(name: String?, lastname: String?): List<PatientData> {
+        return database.patientDao().searchPatients(name, lastname)
     }
 
 }

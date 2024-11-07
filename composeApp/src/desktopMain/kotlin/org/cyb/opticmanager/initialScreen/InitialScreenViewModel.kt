@@ -8,7 +8,6 @@ import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.filterIsInstance
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
-import org.cyb.opticmanager.db.dataModels.PatientData
 import org.cyb.opticmanager.initialScreen.repository.PatientRepository
 
 class InitialScreenViewModel(
@@ -24,7 +23,6 @@ class InitialScreenViewModel(
     fun setEvent(event: InitialScreenContract.InitialScreenUiEvent) = viewModelScope.launch { events.emit(event) }
 
     init {
-        fillTable()
         observeSearch()
         observeNavigationIndex()
     }
@@ -44,69 +42,21 @@ class InitialScreenViewModel(
             events
                 .filterIsInstance<InitialScreenContract.InitialScreenUiEvent.SearchPatients>()
                 .collect { event ->
+                    val parts = event.value.trim().split(" ")
+
+                    val name = if (parts.isNotEmpty()) parts[0] else null
+                    val lastname = if (parts.size > 1) parts[1] else null
+
 //                    println(event.value)
                     setState { copy(loadingPatients = true) }
-                    val nameAndLastname = event.value.lowercase().split(" ")
+//                    val nameAndLastname = event.value.lowercase().split(" ")
 //                    println(nameAndLastname)
-                    val filteredPatients = patientRepository.getPatientWithNameAndLastname(nameAndLastname[0], nameAndLastname[1])
+                    val filteredPatients = patientRepository.searchPatients(name, lastname)
 //                    println(filteredPatients)
                     setState { copy(patients = filteredPatients) }
                     setState { copy(loadingPatients = false) }
                 }
 
-        }
-    }
-
-    private fun fillTable() {
-        viewModelScope.launch {
-
-            patientRepository.clearTable()
-
-            patientRepository.insertPatient(
-                PatientData(name = "jovan", lastname = "simonovic", dateOfBirth = "7.3.2002.", placeOfLiving = "Trstenik")
-            )
-
-            patientRepository.insertPatient(
-                PatientData(name = "Tanja", lastname = "Simonovic", dateOfBirth = "23.3.1994.", placeOfLiving = "Trstenik")
-            )
-
-            patientRepository.insertPatient(
-                PatientData(name = "Rade", lastname = "Simonovic", dateOfBirth = "10.10.1974.", placeOfLiving = "Aleksandrovac")
-            )
-
-            patientRepository.insertPatient(
-                PatientData(name = "Dusan", lastname = "Simonovic", dateOfBirth = "25.4.2006.", placeOfLiving = "Beograd")
-            )
-
-            patientRepository.getAllPatients().collect { patients ->
-                setState { copy(patients = patients) }
-            }
-
-//            repository.clearTable()
-//
-//            repository.insertAppointment(
-//                AppointmentData(0, "Jovan", "Simonovic", "1.1.1999.", "Nesto nebitno")
-//            )
-//            repository.insertAppointment(
-//                AppointmentData(0, "Dusan", "Nikolic", "1.1.1999.", "Nesto nebitno2")
-//            )
-//            repository.insertAppointment(
-//                AppointmentData(0, "Tanja", "Radovic", "12.1.1999.", "Nesto nebitno3")
-//            )
-//            repository.insertAppointment(
-//                AppointmentData(0, "Rade", "Petkovic", "5.1.1999.", "Nesto nebitno4")
-//            )
-//            repository.insertAppointment(
-//                AppointmentData(0, "Vito", "Vitomirovic", "2.1.1999.", "Nesto nebitno5")
-//            )
-//
-//            repository.getAllAppointments().collect { appointments ->
-//                val name = appointments.size
-//                println("Broj termina: $name")
-//
-//                // Ažuriranje stanja
-//                setState { copy(test = "Ime je $name") }
-//            }
         }
     }
 

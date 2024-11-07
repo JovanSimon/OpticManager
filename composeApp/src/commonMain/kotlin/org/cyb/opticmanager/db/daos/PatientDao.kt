@@ -20,10 +20,11 @@ interface PatientDao {
     @Query("DELETE FROM patients")
     suspend fun clearTable()
 
-    @Query("SELECT * FROM patients WHERE name = :name AND lastname = :lastname")
-    suspend fun getPatientWithNameAndLastname(name: String, lastname: String): List<PatientData>
 
-//    @Transaction
-//    @Query("SELECT * FROM patients WHERE id = :patientId")
-//    suspend fun getPatientWithReports(patient: Long): PatientWithReports
+    @Query("""
+    SELECT * FROM patients 
+        WHERE (:name IS NULL OR name LIKE '%' || :name || '%' OR lastname LIKE '%' || :name || '%')
+        AND (:lastname IS NULL OR lastname LIKE '%' || :lastname || '%')
+    """)
+    suspend fun searchPatients(name: String?, lastname: String?): List<PatientData>
 }
