@@ -87,7 +87,10 @@ fun InitialScreen (
             if (state.loadingPatients) {
                 CircularProgressIndicator()
             } else {
-                PatientGrid(patients = state.patients)
+                PatientGrid(
+                    patients = state.patients,
+                    onUserClick = onUserClick
+                )
             }
         }
     }
@@ -132,8 +135,12 @@ fun SearchSection (eventPublisher: (uiEvent: InitialScreenContract.InitialScreen
     }
 }
 
+@ExperimentalMaterialApi
 @Composable
-fun PatientGrid(patients: List<PatientData>) {
+fun PatientGrid(
+    patients: List<PatientData>,
+    onUserClick: (String) -> Unit
+) {
     Box(
         modifier = Modifier
             .fillMaxSize()
@@ -145,19 +152,29 @@ fun PatientGrid(patients: List<PatientData>) {
             modifier = Modifier.widthIn(max = 1024.dp)
         ) {
             items(patients) { patient ->
-                PatientCard(patient)
+                PatientCard(
+                    patient,
+                    onUserClick = onUserClick
+                )
             }
         }
     }
 }
 
+@ExperimentalMaterialApi
 @Composable
-fun PatientCard(patient: PatientData) {
+fun PatientCard(
+    patient: PatientData,
+    onUserClick: (String) -> Unit
+) {
     Card (
         modifier = Modifier
             .padding(8.dp)
             .fillMaxWidth(),
-        elevation = 6.dp
+        elevation = 6.dp,
+        onClick = {
+            onUserClick ("${patient.id}")
+        }
     ) {
         Column(
             modifier = Modifier

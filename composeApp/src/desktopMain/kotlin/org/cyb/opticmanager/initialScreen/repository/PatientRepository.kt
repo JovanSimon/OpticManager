@@ -24,4 +24,8 @@ class PatientRepository (
         return database.patientDao().searchPatients(name, lastname)
     }
 
+    suspend fun getPatientById(id: Long): PatientData {
+        return database.patientDao().getPatientById(id)
+    }
+
 }

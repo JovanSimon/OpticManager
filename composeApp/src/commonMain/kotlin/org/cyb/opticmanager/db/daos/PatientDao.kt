@@ -20,6 +20,8 @@ interface PatientDao {
     @Query("DELETE FROM patients")
     suspend fun clearTable()
 
+    @Query("SELECT * FROM patients WHERE id = :id")
+    suspend fun getPatientById(id: Long): PatientData
 
     @Query("""
     SELECT * FROM patients 
