@@ -14,4 +14,7 @@ interface DoctorReportDao {
 
     @Query("SELECT * FROM doctor_reports")
     fun getAll(): Flow<List<DoctorReport>>
+
+    @Query("SELECT * FROM doctor_reports WHERE patientId = :patientId")
+    fun getReportsByPatientId(patientId: Long): Flow<List<DoctorReport>>
 }

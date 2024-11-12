@@ -70,6 +70,7 @@ fun AddPatientScreen(
         modifier = Modifier
             .fillMaxSize()
     ) { padding ->
+        eventPublisher(AddPatientContract.AddPatientUiEvent.SelectedNavigationIndex(1))
         Column (
             modifier = Modifier
                 .fillMaxSize()
@@ -99,16 +100,16 @@ fun PatientForm(
     Box(
         modifier = Modifier
             .fillMaxSize()
-            .background(Color(0xFFF0F0F0)) // Pozadinska boja
+            .background(Color(0xFFF0F0F0))
             .padding(16.dp),
-        contentAlignment = Alignment.TopCenter // Centriranje forme
+        contentAlignment = Alignment.TopCenter
     ) {
         LazyColumn(
             modifier = Modifier
-                .fillMaxWidth(0.8f) // Postavlja širinu kolone na 80% ekrana
+                .fillMaxWidth(0.8f)
                 .background(Color.White, shape = MaterialTheme.shapes.medium)
-                .padding(24.dp), // Unutrašnji padding za formu
-            verticalArrangement = Arrangement.spacedBy(16.dp), // Razmak između redova
+                .padding(24.dp),
+            verticalArrangement = Arrangement.spacedBy(16.dp),
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
             item {
@@ -120,7 +121,6 @@ fun PatientForm(
                 )
             }
 
-            // Prvi red sa "Ime" i "Prezime"
             item {
                 Row(
                     modifier = Modifier.fillMaxWidth(),
@@ -147,7 +147,6 @@ fun PatientForm(
                 }
             }
 
-            // Drugi red sa "Datum rođenja" i "Datum pregleda"
             item {
                 Row(
                     modifier = Modifier.fillMaxWidth(),
@@ -174,7 +173,7 @@ fun PatientForm(
                 }
             }
 
-            // Treći red sa "Mesto rođenja"
+
             item {
                 Column(modifier = Modifier.fillMaxWidth()) {
                     Text(text = "Mesto rođenja:", fontWeight = FontWeight.SemiBold)
@@ -191,19 +190,18 @@ fun PatientForm(
                 Spacer(modifier = Modifier.height(16.dp))
             }
 
-            // Dugme "More" za prikaz dodatne forme
+
             item {
                 Button(
                     onClick = { showAdditionalForm = !showAdditionalForm },
                     modifier = Modifier
-                        .fillMaxWidth(0.5f) // Širina dugmeta je 50% kolone
+                        .fillMaxWidth(0.5f)
                         .height(48.dp)
                 ) {
                     Text("More", fontSize = 16.sp)
                 }
             }
 
-            // Prikaz dodatne forme za dijagnostiku oka
             if (showAdditionalForm) {
                 item {
                     Spacer(modifier = Modifier.height(24.dp))
@@ -233,7 +231,7 @@ fun EyeDiagnosisForm(
         verticalArrangement = Arrangement.spacedBy(16.dp),
         modifier = Modifier.fillMaxWidth()
     ) {
-        // Sekcija za Daljinu
+
         Text(text = "Daljina", fontWeight = FontWeight.Bold, fontSize = 18.sp)
 
         Row(
@@ -339,7 +337,7 @@ fun EyeDiagnosisForm(
 
         Spacer(modifier = Modifier.height(16.dp))
 
-        // Sekcija za Blizinu
+
         Text(
             text = "Blizina",
             fontWeight = FontWeight.Bold,

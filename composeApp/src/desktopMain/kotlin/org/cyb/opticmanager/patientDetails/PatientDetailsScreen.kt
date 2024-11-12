@@ -1,16 +1,22 @@
 package org.cyb.opticmanager.patientDetails
 
+import DoctorReport
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.grid.GridCells
+import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
+import androidx.compose.foundation.lazy.grid.items
 import androidx.compose.material.Button
+import androidx.compose.material.Card
 import androidx.compose.material.Icon
 import androidx.compose.material.IconButton
 import androidx.compose.material.MaterialTheme
@@ -38,6 +44,7 @@ import org.koin.core.parameter.parametersOf
 fun NavGraphBuilder.patientDetails(
     route: String,
     arguments: List<NamedNavArgument>,
+    onUserClick: (String) -> Unit,
     onClose: () -> Unit
 ) = composable(
     route = route,
@@ -53,6 +60,7 @@ fun NavGraphBuilder.patientDetails(
         eventPublisher = {
             viewModel.setEvent(it)
         },
+        onUserClick = onUserClick,
         onClose = onClose
     )
 }
@@ -61,7 +69,8 @@ fun NavGraphBuilder.patientDetails(
 fun PatientDetailsScreen(
     state: PatientDetailsContract.PatientDetailsUiState,
     eventPublisher: (uiEvent: PatientDetailsContract.PatientDetailsUiEvent) -> Unit,
-    onClose: () -> Unit
+    onClose: () -> Unit,
+    onUserClick: (String) -> Unit
 ) {
     Scaffold(
         topBar = {
@@ -84,13 +93,77 @@ fun PatientDetailsScreen(
                     .padding(16.dp)
             ) {
                 PatientInfoSection(
-                    state,
-                    {},
-                    {}
+                    state = state,
+                    onAddExamClick = { onUserClick(state.patientId) },
+                    onEditClick = {}
                 )
+
+                Spacer(modifier = Modifier.height(16.dp))
+
+                Text(
+                    text = "Izveštaji pregleda",
+                    fontSize = 20.sp,
+                    fontWeight = FontWeight.Bold,
+                    color = MaterialTheme.colors.primary,
+                    modifier = Modifier
+                        .padding(vertical = 8.dp)
+                )
+
+                DoctorReportsGrid(reports = state.reports)
             }
         }
     )
+}
+
+
+@Composable
+fun DoctorReportsGrid(reports: List<DoctorReport>) {
+    LazyVerticalGrid(
+        columns = GridCells.Fixed(3),
+        modifier = Modifier.fillMaxWidth(),
+        verticalArrangement = Arrangement.spacedBy(16.dp),
+        horizontalArrangement = Arrangement.spacedBy(16.dp),
+        contentPadding = PaddingValues(16.dp)
+    ) {
+        items(reports) { report ->
+            DoctorReportCard(report = report)
+        }
+    }
+}
+
+@Composable
+fun DoctorReportCard(report: DoctorReport) {
+    Card(
+        modifier = Modifier
+            .fillMaxWidth()
+            .padding(8.dp),
+        elevation = 4.dp,
+        backgroundColor = Color(0xFFF5F5F5),
+        shape = MaterialTheme.shapes.medium
+    ) {
+        Column(
+            modifier = Modifier.padding(16.dp)
+        ) {
+            Text(
+                text = "Izveštaj od: ${report.dateOfReport}",
+                style = MaterialTheme.typography.h6,
+                fontWeight = FontWeight.Bold,
+                color = MaterialTheme.colors.primary
+            )
+            Spacer(modifier = Modifier.height(8.dp))
+            Text("Daljina")
+            Text("OD SPH: ${report.odSphFar}     OD CLY: ${report.odClyFar}     OD AX: ${report.odAxFar}")
+            Text("OS SPH: ${report.osSphFar}     OS CLY: ${report.osClyFar}     OS AX: ${report.osAxFar}")
+            Text("PD: ${report.pdFar}")
+            Spacer(modifier = Modifier.height(8.dp))
+            Text("Blizina")
+            Text("OD SPH: ${report.odSphClose}     OD CLY: ${report.odClyClose}     OD AX: ${report.odAxClose}")
+            Text("OS SPH: ${report.osSphClose}     OS CLY: ${report.osClyClose}     OS AX: ${report.osAxClose}")
+            Text("PD: ${report.pdClose}")
+            Spacer(modifier = Modifier.height(8.dp))
+            Text("Opis: ${report.description}")
+        }
+    }
 }
 
 @Composable
@@ -102,16 +175,16 @@ fun PatientInfoSection(
     Box(
         modifier = Modifier
             .fillMaxWidth()
-            .background(Color(0xFFF0F0F0)) // Siva pozadina za bolji kontrast
+            .background(Color(0xFFF0F0F0))
             .padding(16.dp),
         contentAlignment = Alignment.TopCenter
     ) {
         LazyColumn(
             modifier = Modifier
-                .fillMaxWidth(0.8f) // Širina sekcije je 80% ekrana
-                .background(Color.White, shape = MaterialTheme.shapes.medium) // Bela pozadina sa zaobljenim ivicama
-                .padding(24.dp), // Unutrašnji padding
-            verticalArrangement = Arrangement.spacedBy(16.dp), // Razmak između elemenata
+                .fillMaxWidth(0.8f)
+                .background(Color.White, shape = MaterialTheme.shapes.medium)
+                .padding(24.dp),
+            verticalArrangement = Arrangement.spacedBy(16.dp),
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
             item {
@@ -130,7 +203,7 @@ fun PatientInfoSection(
                 InfoRow(label = "Mesto rođenja:", value = state.placeOfBirth)
             }
 
-            // Dugmad za "Dodaj pregled" i "Izmeni"
+
             item {
                 Spacer(modifier = Modifier.height(24.dp))
                 Row(
@@ -139,7 +212,7 @@ fun PatientInfoSection(
                 ) {
                     Button(
                         onClick = onAddExamClick,
-                        modifier = Modifier.weight(1f).padding(end = 8.dp) // Dodaje razmak između dugmadi
+                        modifier = Modifier.weight(1f).padding(end = 8.dp)
                     ) {
                         Text("Dodaj pregled")
                     }

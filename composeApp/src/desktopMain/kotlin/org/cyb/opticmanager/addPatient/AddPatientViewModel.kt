@@ -6,7 +6,6 @@ import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
-import kotlinx.coroutines.flow.count
 import kotlinx.coroutines.flow.filterIsInstance
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
@@ -15,7 +14,6 @@ import kotlinx.coroutines.launch
 import org.cyb.opticmanager.db.dataModels.PatientData
 import org.cyb.opticmanager.initialScreen.repository.DoctorReportRepository
 import org.cyb.opticmanager.initialScreen.repository.PatientRepository
-import java.time.Clock
 
 class AddPatientViewModel (
     private val patientRepository: PatientRepository,
@@ -153,6 +151,7 @@ class AddPatientViewModel (
                                 osClyClose = state.value.osClyClose,
                                 osAxClose = state.value.osAxClose,
                                 pdClose = state.value.pdClose.toInt(),
+                                dateOfReport = state.value.dateOfExam,
                                 description = state.value.description
                             )
 

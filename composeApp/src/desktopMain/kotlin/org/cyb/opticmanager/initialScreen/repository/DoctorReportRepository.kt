@@ -14,4 +14,8 @@ class DoctorReportRepository (
     fun getAllReports(): Flow<List<DoctorReport>> {
         return database.doctorReportDao().getAll()
     }
+
+    fun getReportsByPatientId(patientId: Long): Flow<List<DoctorReport>> {
+        return database.doctorReportDao().getReportsByPatientId(patientId)
+    }
 }

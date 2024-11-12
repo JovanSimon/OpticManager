@@ -2,7 +2,7 @@
   "formatVersion": 1,
   "database": {
     "version": 9,
-    "identityHash": "b73f6837ab4dc9b8836bbba588864a41",
+    "identityHash": "5deb63f5d6b6e297db21d56e488846a0",
     "entities": [
       {
         "tableName": "appointments",
@@ -90,7 +90,7 @@
       },
       {
         "tableName": "doctor_reports",
-        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `patientId` INTEGER NOT NULL, `odSphFar` TEXT NOT NULL, `odClyFar` TEXT NOT NULL, `odAxFar` TEXT NOT NULL, `osSphFar` TEXT NOT NULL, `osClyFar` TEXT NOT NULL, `osAxFar` TEXT NOT NULL, `pdFar` INTEGER NOT NULL, `odSphClose` TEXT NOT NULL, `odClyClose` TEXT NOT NULL, `odAxClose` TEXT NOT NULL, `osSphClose` TEXT NOT NULL, `osClyClose` TEXT NOT NULL, `osAxClose` TEXT NOT NULL, `pdClose` INTEGER NOT NULL, `description` TEXT NOT NULL, FOREIGN KEY(`patientId`) REFERENCES `patients`(`id`) ON UPDATE NO ACTION ON DELETE CASCADE )",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `patientId` INTEGER NOT NULL, `odSphFar` TEXT NOT NULL, `odClyFar` TEXT NOT NULL, `odAxFar` TEXT NOT NULL, `osSphFar` TEXT NOT NULL, `osClyFar` TEXT NOT NULL, `osAxFar` TEXT NOT NULL, `pdFar` INTEGER NOT NULL, `odSphClose` TEXT NOT NULL, `odClyClose` TEXT NOT NULL, `odAxClose` TEXT NOT NULL, `osSphClose` TEXT NOT NULL, `osClyClose` TEXT NOT NULL, `osAxClose` TEXT NOT NULL, `pdClose` INTEGER NOT NULL, `dateOfReport` TEXT NOT NULL, `description` TEXT NOT NULL, FOREIGN KEY(`patientId`) REFERENCES `patients`(`id`) ON UPDATE NO ACTION ON DELETE CASCADE )",
         "fields": [
           {
             "fieldPath": "id",
@@ -189,6 +189,12 @@
             "notNull": true
           },
           {
+            "fieldPath": "dateOfReport",
+            "columnName": "dateOfReport",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
             "fieldPath": "description",
             "columnName": "description",
             "affinity": "TEXT",
@@ -229,7 +235,7 @@
     ],
     "setupQueries": [
       "CREATE TABLE IF NOT EXISTS room_master_table (id INTEGER PRIMARY KEY,identity_hash TEXT)",
-      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, 'b73f6837ab4dc9b8836bbba588864a41')"
+      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, '5deb63f5d6b6e297db21d56e488846a0')"
     ]
   }
 }

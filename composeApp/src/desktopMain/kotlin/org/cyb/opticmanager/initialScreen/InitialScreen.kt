@@ -69,14 +69,11 @@ fun InitialScreen (
     onUserClick: (String) -> Unit
 ) {
 
-    LaunchedEffect(state.selectedItemIndex) {
-
-    }
-
     Scaffold(
         modifier = Modifier
             .fillMaxSize()
     ) { padding ->
+        eventPublisher(InitialScreenContract.InitialScreenUiEvent.SelectedNavigationIndex(0))
         Column (
             modifier = Modifier
                 .fillMaxSize()

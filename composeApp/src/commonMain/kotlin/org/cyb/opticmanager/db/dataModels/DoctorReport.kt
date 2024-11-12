@@ -31,5 +31,6 @@ data class DoctorReport(
     val osClyClose: String,
     val osAxClose: String,
     val pdClose: Int,
+    val dateOfReport: String,
     val description: String,
 )
